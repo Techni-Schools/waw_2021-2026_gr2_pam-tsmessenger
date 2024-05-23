@@ -7,16 +7,16 @@ const [address] = hostUri.split(":");
 const port = 8080;
 
 const api = new Api({
-baseURL: `http://${address}:${port}/api`,
-getAuthToken: async () => {
-const token = await AsyncStorage.getItem("auth-token");
-return token;
-},
-setAuthToken: async (token) => {
-token
-? await AsyncStorage.setItem("auth-token", token)
-: await AsyncStorage.removeItem("auth-token");
-},
+  baseURL: `http://${address}:${port}/api`,
+  getAuthToken: async () => {
+    const token = await AsyncStorage.getItem("auth-token");
+    return token;
+  },
+  setAuthToken: async (token) => {
+    token
+      ? await AsyncStorage.setItem("auth-token", token)
+      : await AsyncStorage.removeItem("auth-token");
+  },
 });
 
 export default api;

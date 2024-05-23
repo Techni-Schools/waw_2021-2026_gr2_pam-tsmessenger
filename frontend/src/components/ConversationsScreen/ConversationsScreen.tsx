@@ -1,12 +1,17 @@
 import React from "react";
-import { View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import styles from "./styles";
 import { ConversationsScreenProps } from "./types";
+import Header from "../Header";
 
 const ConversationsScreen: React.FC<ConversationsScreenProps> = (props) => {
-const {} = props;
+  const {} = props;
 
-return <View style={[styles.container]}></View>;
-}
+  return (
+    <SafeAreaView style={[styles.container]}>
+      <Header headline="Conversations"></Header>
+    </SafeAreaView>
+  );
+};
 
 export default ConversationsScreen;
