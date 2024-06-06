@@ -1,1 +1,3 @@
-export type MessageInputBarProps = {};
+export type MessageInputBarProps = {
+  onSubmit: (content: string) => void;
+};

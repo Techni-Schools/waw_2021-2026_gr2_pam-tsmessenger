@@ -7,6 +7,7 @@ import MessageInputBar from "../MessageInputBar";
 import Header from "../Header";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../api";
+import MessageList from "../MessageList";
 
 const ConversationScreen: React.FC<ConversationScreenProps> = (props) => {
   const { route } = props;
@@ -22,10 +23,19 @@ const ConversationScreen: React.FC<ConversationScreenProps> = (props) => {
     queryFn: () => api.conversations.retrieve(conversationId),
   });
 
-  const {} = useMutation({
+  const { data: messages, refetch } = useQuery({
+    queryKey: ["api.conversations.messages.list", conversationId],
+    queryFn: () =>
+      api.conversations.messages.list(conversationId, { populate: "user" }),
+  });
+
+  const { mutate: createMessage } = useMutation({
     mutationKey: ["api.conversations.message.create", conversationId],
     mutationFn: (variables: { content: string }) =>
       api.conversations.messages.create(conversationId, variables),
+    onSuccess: () => {
+      refetch();
+    },
   });
 
   return (
@@ -42,8 +52,10 @@ const ConversationScreen: React.FC<ConversationScreenProps> = (props) => {
         keyboardVerticalOffset={10}
       >
         <Header headline="Conversation"></Header>
-        {/* <MessageList /> */}
-        <MessageInputBar />
+        <View style={{ flex: 1 }}>
+          <MessageList messages={messages} />
+        </View>
+        <MessageInputBar onSubmit={(content) => createMessage({ content })} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

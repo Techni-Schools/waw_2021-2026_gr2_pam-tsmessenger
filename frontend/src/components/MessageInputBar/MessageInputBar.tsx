@@ -5,7 +5,7 @@ import { MessageInputBarProps } from "./types";
 import { Button, TextInput } from "react-native-paper";
 
 const MessageInputBar: React.FC<MessageInputBarProps> = (props) => {
-  const {} = props;
+  const { onSubmit } = props;
 
   const [content, setContent] = useState<string>("");
 
@@ -19,7 +19,15 @@ const MessageInputBar: React.FC<MessageInputBarProps> = (props) => {
         autoCapitalize="none"
         keyboardAppearance="dark"
       />
-      <Button mode="contained">Send</Button>
+      <Button
+        mode="contained"
+        onPress={() => {
+          onSubmit(content);
+          setContent("");
+        }}
+      >
+        Send
+      </Button>
     </View>
   );
 };
