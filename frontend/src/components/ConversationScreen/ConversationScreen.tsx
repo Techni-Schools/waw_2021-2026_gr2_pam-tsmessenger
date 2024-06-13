@@ -8,6 +8,7 @@ import Header from "../Header";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import api from "../../api";
 import MessageList from "../MessageList";
+import ConversationMenu from "../ConversationMenu";
 
 const ConversationScreen: React.FC<ConversationScreenProps> = (props) => {
   const { route } = props;
@@ -51,7 +52,9 @@ const ConversationScreen: React.FC<ConversationScreenProps> = (props) => {
         enabled
         keyboardVerticalOffset={10}
       >
-        <Header headline="Conversation"></Header>
+        <Header headline="Conversation">
+          <ConversationMenu />
+        </Header>
         <View style={{ flex: 1 }}>
           <MessageList messages={messages} />
         </View>

@@ -1,1 +1,4 @@
-export type ParticipantModalProps = {};
+export type ParticipantModalProps = {
+  visible: boolean;
+  onClose: () => void;
+};
