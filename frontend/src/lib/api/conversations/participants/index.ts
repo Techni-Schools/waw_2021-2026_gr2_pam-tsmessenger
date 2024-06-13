@@ -15,7 +15,8 @@ class Participants extends AxiosManager {
     }
   ) => {
     const { data: resData } = await this.instance.get<{ data: Participant[] }>(
-      `/conversations/${conversationId}/participants`
+      `/conversations/${conversationId}/participants`,
+      { params }
     );
     return resData.data;
   };
